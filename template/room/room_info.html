@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+
+{% block main_content %}
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Room Information</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="cards">
+        <div class="card">
+            <h3>Total Rooms</h3>
+            <p>{{total_rooms}}</p>
+        </div>
+        <div class="card">
+            <h3>Rooms Available</h3>
+            <p>{{total_rooms_available}}</p>
+        </div>
+        <div class="card">
+            <h3>Available Golden Rooms</h3>
+            <p>{{total_available_golden_rooms}}</p>
+        </div>
+        <div class="card">
+            <h3>Available Silver Rooms</h3>
+            <p>{{total_available_silver_rooms}}</p>
+        </div>
+    </div>
+
+    <!-- Room Search and New Room Button Section -->
+    <div class="room-search-section">
+        <h3>Find a Room</h3>
+        <form method="POST" action="{% url 'room_info' %}">
+            {% csrf_token %}
+            <label for="room_number">Room Number:</label>
+            <input type="text" id="room_number" name="room_number" placeholder="Enter room number" required>
+            <button type="submit">Search Room</button>
+        </form>
+        
+        <a href="{% url 'create_room' %}">
+            <button class="create-room-btn">Create New Room</button>
+        </a>
+    
+        <!-- Room Details Section -->
+        {% if room %}
+        <div class="room-details">
+            <h4>Room Details</h4>
+            <p><strong>Room Number:</strong> {{ room.room_number }}</p>
+            <p><strong>Room Type:</strong> {{ room.room_type }}</p>
+            <p><strong>Status:</strong> 
+                {% if room.room_status %}
+                    Booked
+                {% else %}
+                    Available
+                {% endif %}
+            </p>
+            <p><strong>Room Rent:</strong> {{ room.room_rent_d }} TK</p>
+            <p><strong>Extra Bed Rent:</strong> {{ room.room_rent_h }} TK</p>
+            <p><strong>Capacity:</strong> {{ room.capacity }}</p>
+            <p><strong>Extra Guest Capacity:</strong> {{ room.extra_capacity }}</p>
+            <a href="{% url 'delete_room' room.pk %}">
+                <button class="create-room-btn">Delete Room</button>
+            </a>
+        </div>
+        {% else %}
+        <p class="no-room-message">No room details available. Please enter a valid room number.</p>
+        {% endif %}
+    </div>
+
+     <!-- Booking Table Section -->
+      
+    {% if rooms %}
+        <div class="table-section">
+            <h3>All Rooms</h3>
+            <table>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Room Type</th>
+                    <th>Room Status</th>
+                    <th>Capacity</th>
+                    <th>Extra Capacity</th>
+                    <th>Room Rent</th>
+                    <th>Extra Bed Charge</th>
+                </tr>
+                
+                {% for r in rooms %}    
+                    <tr>
+                        <td>{{r.room_number}}</td>
+                        <td>{{r.room_type}}</td>
+                        {% if r.room_status %}
+                            <td>Booked</td>
+                            {% else %}
+                                <td>Available</td>
+                        {% endif %}
+                        <td>{{r.capacity}}</td>
+                        <td>{{r.extra_capacity}}</td>
+                        <td>{{r.room_rent_d}} TK</td>
+                        <td>{{r.room_rent_h}} TK</td>
+                    </tr>
+                {% endfor %}  
+            </table>
+        </div>
+    {% endif %}
+        
+    
+</div>
+
+{% endblock main_content %}

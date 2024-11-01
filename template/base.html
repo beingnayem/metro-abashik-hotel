@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Metro Abashik Hotel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'CSS/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/room.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/message.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/checkin.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/booking_details.css' %}">
+</head>
+<body>
+  {% block message_content %}
+    
+  {% endblock message_content %}
+  <!-- Sidebar -->
+  <div class="sidebar">
+        <h2>Metro Abashik Hotel</h2>
+        <ul>
+            <a href="{% url 'dashboard' %}">
+              <li>Dashboard</li>
+            </a>
+            <a href="{% url 'booking_page' %}">
+              <li>Bookings</li>
+            </a>
+            <a href="{% url 'room_info' %}">
+              <li>Rooms</li>
+            </a>
+            <li>Customers</li>
+            <li>Reports</li>
+            <li>Settings</li>
+            <a href="{% url 'signout' %}">
+              <li>Sign Out <i class="fas fa-sign-out-alt"></i></li>
+            </a>
+        </ul>
+  </div>
+
+  <!-- Main Content -->
+  {% block main_content %}
+    
+  {% endblock main_content %}
+  
+</body>
+</html>

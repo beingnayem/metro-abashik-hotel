@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+
+{% block main_content %}
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Bookings</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="cards">
+        <div class="card">
+            <h3>Total Bookings</h3>
+            <p>{{total_bookings}}</p>
+        </div>
+        <div class="card">
+            <h3>Rooms Available</h3>
+            <p>{{available_rooms}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Check-ins</h3>
+            <p>{{today_checkin}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Check-outs</h3>
+            <p>{{today_checkout}}</p>
+        </div>
+    </div>
+
+    <div class="checkin-container">
+        <h2>Check-Out</h2>
+    
+        <form method="POST" action="{% url 'checkout' %}">
+            {% csrf_token %}
+    
+            <label for="checkin_date">Billing Email:</label>
+            <input type="email" name="email" id="email" required>
+    
+            <h3>Room Information</h3>
+            <input type="hidden" name="rooms_no" id="rooms_no" value="{{ rooms_no }}" required>
+            {% for i in rooms_no %}
+                <div class="guest-info">
+                    <label for="guest_name_{{ i }}">{{ forloop.counter }}. Room Number:</label>
+                    <input type="text" name="rooms[{{ i }}][room_number]" id="room_number{{ i }}" required>
+                </div>
+            {% endfor %}
+    
+            <button type="submit">Check Out</button>
+        </form>
+    </div>    
+</div>
+
+{% endblock main_content %}

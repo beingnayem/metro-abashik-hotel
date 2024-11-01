@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+
+{% block main_content %}
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Bookings</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="cards">
+        <div class="card">
+            <h3>Total Bookings</h3>
+            <p>{{total_bookings}}</p>
+        </div>
+        <div class="card">
+            <h3>Rooms Available</h3>
+            <p>{{available_rooms}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Check-ins</h3>
+            <p>{{today_checkin}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Check-outs</h3>
+            <p>{{today_checkout}}</p>
+        </div>
+    </div>
+
+    <!-- Room Search and New Room Button Section -->
+    <div class="room-search-section" style="display: flex; justify-content:space-between">
+        <div>
+            <h3>Book a Room</h3>
+            <form method="POST" action="{% url 'checkin_page' %}">
+                {% csrf_token %}
+                <input type="text" id="room_number" name="guests" placeholder="Enter Number Of Guests" required>
+                <button type="submit">Book Room</button>
+            </form>
+        </div>
+        <div>
+            <h3>Check Out</h3>
+            <form method="POST" action="{% url 'checkout_page' %}">
+                {% csrf_token %}
+                <input type="text" id="rooms_no" name="rooms_no" placeholder="Enter Number Of Rooms" required>
+                <button type="submit">Check Out</button>
+            </form>
+        </div>
+        <div>
+            <h3>Search Booking</h3>
+            <form method="POST" action="{% url 'booking_details' %}">
+                {% csrf_token %}
+                <input type="text" id="room_number" name="room_number" placeholder="Enter room number" required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Booking Table Section -->
+    <div class="table-section">
+        <h3>Recent Bookings</h3>
+        <table>
+            <tr>
+                <th>Booking ID</th>
+                <th>Customer Name</th>
+                <th>Room Number</th>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>Status</th>
+            </tr>
+            
+            {% for b in bookings %}
+                <tr>
+                    <td>#{{b.pk}}</td>
+                    <td>
+                        {% for customer in b.customers.all %}
+                            {{ customer.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{b.room.room_number}}</td>
+                    <td>{{b.checkin_date}}</td>
+                    <td>{{b.checkout_date}}</td>
+                    {% if b.room.room_status %}
+                        <td>Checked In</td>
+                        {% else %}
+                        <td>Checked Out</td>
+                    {% endif %}
+                        
+                </tr>
+            {% endfor %}
+                
+        </table>
+    </div>
+</div>
+
+{% endblock main_content %}

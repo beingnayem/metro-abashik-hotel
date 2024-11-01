@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Room Information</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="cards">
+        <div class="card">
+            <h3>Total Rooms</h3>
+            <p>{{total_rooms}}</p>
+        </div>
+        <div class="card">
+            <h3>Rooms Available</h3>
+            <p>{{total_rooms_available}}</p>
+        </div>
+        <div class="card">
+            <h3>Available Golden Rooms</h3>
+            <p>{{total_available_golden_rooms}}</p>
+        </div>
+        <div class="card">
+            <h3>Available Silver Rooms</h3>
+            <p>{{total_available_silver_rooms}}</p>
+        </div>
+    </div>
+
+    <!-- Create Room Form Section -->
+    <div class="create-room-section">
+        <h3>Create New Room</h3>
+        <form method="POST" action="{% url 'create_room' %}">
+            {% csrf_token %}
+            
+            <!-- Room Number and Floor Number in the same row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="new_room_number">Room Number:</label>
+                    <input type="text" id="new_room_number" name="room_number" required>
+                </div>
+                <div class="form-group">
+                    <label for="floor_number">Floor Number:</label>
+                    <input type="number" id="floor_number" name="floor_number" required>
+                </div>
+            </div>
+            
+            <label for="room_type">Room Type:</label>
+            <select id="room_type" name="room_type" required>
+                <option value="" disabled selected>Select Room Type</option>
+                <option value="Silver">Silver</option>
+                <option value="Golden">Golden</option>
+            </select>
+            
+            <!-- Room Capacity and Extra Guest Capacity in the same row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="room_capacity">Room Capacity:</label>
+                    <input type="number" id="room_capacity" name="capacity" required>
+                </div>
+                <div class="form-group">
+                    <label for="extra_guest_capacity">Extra Guest Capacity:</label>
+                    <input type="number" id="extra_guest_capacity" name="extra_capacity" required>
+                </div>
+            </div>
+            
+            <!-- Room Rent per Night and Room Rent per Hour in the same row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="room_rent_per_night">Room Rent</label>
+                    <input type="number" id="room_rent_per_night" name="room_rent_d" required>
+                </div>
+                <div class="form-group">
+                    <label for="room_rent_per_hour">Extra Bed Charge:</label>
+                    <input type="number" id="room_rent_per_hour" name="room_rent_h" required>
+                </div>
+            </div>
+    
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+</div>
+
+{% endblock main_content %}
