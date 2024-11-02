@@ -18,7 +18,7 @@ SECRET_KEY = 'django-insecure-yx%h*qx=#t=vk&eo+kd_qon-c@l7bgt@$+0172g)7exclsvvyn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -133,6 +134,9 @@ STATIC_URL = 'static/'
 
 # Specify the absolute path to the directory where collectstatic will collect files.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = "whitenoise.storage. CompressedManifestStaticFilesStorage"
+
 
 # Additional directories where Django will look for static files
 STATICFILES_DIRS = [
