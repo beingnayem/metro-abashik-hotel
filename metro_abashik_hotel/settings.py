@@ -135,7 +135,9 @@ STATIC_URL = 'static/'
 # Specify the absolute path to the directory where collectstatic will collect files.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = "whitenoise.storage. CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
 
 
 # Additional directories where Django will look for static files
