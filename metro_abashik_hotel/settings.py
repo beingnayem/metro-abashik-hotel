@@ -16,7 +16,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'template')
 SECRET_KEY = 'django-insecure-yx%h*qx=#t=vk&eo+kd_qon-c@l7bgt@$+0172g)7exclsvvyn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -24,7 +24,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
