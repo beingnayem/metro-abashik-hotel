@@ -3,11 +3,16 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-admin.site.site_header = 'MAH'
-admin.site.site_title = 'MAH ADMIN'
+from django.conf.urls import handler404
+from accounts.views import custom_404_view
+
+handler404 = custom_404_view
+
+# admin.site.site_header = 'MAH'
+# admin.site.site_title = 'MAH ADMIN'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('booking/', include('booking.urls')),

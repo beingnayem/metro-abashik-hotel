@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 def signin(request):
 
@@ -27,3 +29,8 @@ def signin(request):
 def signout(request):
     logout(request)
     return redirect('signin')
+
+
+
+def custom_404_view(request, exception):
+    return render(request, '404.html', status=404)
