@@ -14,6 +14,7 @@ class Room(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
     
@@ -39,4 +40,3 @@ class Room(models.Model):
     @classmethod
     def total_available_golden_rooms(cls):
         return cls.objects.filter(room_type='Golden', room_status=False).count()
-    

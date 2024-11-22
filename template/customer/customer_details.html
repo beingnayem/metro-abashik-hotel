@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+
+{% block main_content %}
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Customer Details</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Total Guest</h3>
+            <p>{{total_guest}}</p>
+        </div>
+        <div class="card">
+            <h3>Curent Guest</h3>
+            <p>{{curent_guest}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Check In Guest</h3>
+            <p>{{today_checkin_guest}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Check Out Guest</h3>
+            <p>{{today_checkout_guest}}</p>
+        </div>
+    </div>
+
+    <div class="room-search-section">
+        <h3>Find Customer</h3>
+        <form method="POST" action="{% url 'customer_history' %}">
+            {% csrf_token %}
+            <label for="room_number">E-mail:</label>
+            <input type="text" id="room_number" name="email" placeholder="Enter Guest E-mail" required>
+            <button type="submit">Search Guest</button>
+        </form>
+    </div>
+      
+    {% if customer %}
+        <div class="table-section">
+            <h3>Recent Bookings</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                </tr>
+                <tr>
+                    <th>{{customer.name}}</th>
+                    <th>{{customer.email}}</th>
+                    <th>{{customer.phone_number}}</th>
+                    <th>{{customer.address}}</th>
+                </tr>
+                {% if bookings %}
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>Booking ID</th>
+                    </tr>
+                    
+                    {% for b in bookings %}    
+                        <tr>
+                            <td>{{b.room.room_number}}</td>
+                            <td>{{b.checkin_date}}</td>
+                            <td>{{b.checkout_date}}</td>
+                            <td>{{b.id}}</td>
+                        </tr>
+                    {% endfor %}  
+                {% endif %}
+                </table>
+        </div>
+    {% endif %}  
+</div>
+
+{% endblock main_content %}

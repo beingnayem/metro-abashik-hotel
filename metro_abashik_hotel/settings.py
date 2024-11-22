@@ -157,9 +157,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER =  "halimadelwar1958@gmail.com"
 EMAIL_HOST_PASSWORD = "tnachavutfneivst"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_SSL = False
+
+
+
+TIME_ZONE = 'Asia/Dhaka'  # Set the timezone to Bangladesh Standard Time
+USE_TZ = True  # Enable timezone support

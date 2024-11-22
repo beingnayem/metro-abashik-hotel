@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .models import User
 
 
 def signin(request):
@@ -34,3 +35,50 @@ def signout(request):
 
 def custom_404_view(request, exception):
     return render(request, '404.html', status=404)
+
+
+
+@login_required
+def profile_view(request):
+    # Fetch the currently logged-in user's profile
+    user = request.user
+    context = {
+        'user': user
+    }
+    return render(request, 'accounts/profile.html', context)
+
+
+@login_required
+def update_profile(request):
+    user = request.user
+    if request.method == 'POST':
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.gender = request.POST.get('gender')
+        user.phone_number = request.POST.get('phone_number')
+        user.save()
+        return redirect('profile')
+    return render(request, 'accounts/update_profile.html', {'user': user})
+
+
+@login_required
+def change_pass(request):
+    user = request.user
+    if request.method == 'POST':
+        old_password = request.POST.get('old_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if user.check_password(old_password):
+            if new_password == confirm_password:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, "Password changed successfully")
+                return redirect('profile')
+            else:
+                messages.error(request, "New password and confirm password do not match")
+                return redirect('change_pass')
+        else:
+            messages.error(request, "Old password is incorrect")
+            return redirect('change_pass')
+    return render(request, 'accounts/change_pass.html', {'user': user})

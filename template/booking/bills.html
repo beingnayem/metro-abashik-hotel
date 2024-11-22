@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+
+{% block main_content %}
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Bills</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="cards">
+        <div class="card">
+            <h3>Total Bills</h3>
+            <p>{{total_bills}}</p>
+        </div>
+        <div class="card">
+            <h3>Booked</h3>
+            <p>{{booked}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Bills</h3>
+            <p>{{today_bills}}</p>
+        </div>
+        <div class="card">
+            <h3>Todays Total</h3>
+            <p>{{today_total_in_k}} K</p>
+        </div>
+    </div>
+
+    <!-- Room Search and New Room Button Section -->
+    <div class="room-search-section">
+        <h3>Find Bill</h3>
+        <form method="POST" action="{% url 'search_bill' %}">
+            {% csrf_token %}
+            <label for="room_number">E-mail:</label>
+            <input type="text" id="room_number" name="email" placeholder="Enter Guest E-mail" required>
+            <button type="submit">Search Bill</button>
+        </form>
+    </div>
+
+    <!-- Booking Table Section -->
+    <div class="table-section">
+        <h3>Recent Bills</h3>
+        <table>
+            <tr>
+                <th>Bill ID</th>
+                <th>Customer Name</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Cost</th>
+                <th>Action</th>
+            </tr>
+            
+            {% for b in bills %}
+                <tr>
+                    <td>#{{b.pk}}</td>
+                    <td>{{b.customer.name}}</td>
+                    <td>{{b.customer.email}}</td>
+                    <td>{{b.created_at}}</td>
+                    <td>{{b.total_cost}}</td>    
+                    <td>
+                        <a href="{% url 'view_invoice' bill_id=b.pk %}" target="_blank">
+                            <button>View</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock main_content %}

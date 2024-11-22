@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+
+{% block main_content %}
+
+<style>
+
+    /* Profile Update Form Container */
+.profile-update-form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Group Styling */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.input-group input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Gender Options */
+.gender-options {
+    display: flex;
+    gap: 15px;
+    font-size: 16px;
+}
+
+.gender-options input {
+    margin-right: 5px;
+}
+
+/* Submit Button */
+.submit-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.submit-button:focus {
+    outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-update-form-container {
+        padding: 20px;
+    }
+
+    .input-group label {
+        font-size: 14px;
+    }
+
+    .input-group input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .submit-button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+</style>
+
+
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Customer Details</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <div class="profile-update-form-container">
+        <form action="{% url 'update_profile' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" required>
+            </div>
+            <div class="input-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" required>
+            </div>
+            <div class="input-group">
+                <label for="gender">Gender:</label>
+                <div class="gender-options">
+                    <label>
+                        <input type="radio" name="gender" value="Male" {% if user.gender == "Male" %}checked{% endif %}>
+                        Male
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="Female" {% if user.gender == "Female" %}checked{% endif %}>
+                        Female
+                    </label>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="phone_number">Phone Number:</label>
+                <input type="tel" id="phone_number" name="phone_number" value="{{ user.phone_number }}" pattern="[0-9]{11}" placeholder="Enter 11-digit phone number" required>
+            </div>
+            <button type="submit" class="submit-button">Update Profile</button>
+        </form>
+    </div>
+    
+    
+</div>
+
+{% endblock main_content %}

@@ -22,8 +22,8 @@
             <p>{{total_bookings}}</p>
         </div>
         <div class="card">
-            <h3>Rooms Available</h3>
-            <p>{{available_rooms}}</p>
+            <h3>Booked</h3>
+            <p>{{booked}}</p>
         </div>
         <div class="card">
             <h3>Today's Check-ins</h3>
@@ -45,17 +45,16 @@
             <input type="email" name="email" id="email" required>
     
             <h3>Room Information</h3>
-            <input type="hidden" name="rooms_no" id="rooms_no" value="{{ rooms_no }}" required>
             {% for i in rooms_no %}
                 <div class="guest-info">
                     <label for="guest_name_{{ i }}">{{ forloop.counter }}. Room Number:</label>
-                    <input type="text" name="rooms[{{ i }}][room_number]" id="room_number{{ i }}" required>
+                    <input type="text" name="rooms[]" id="room_number{{ forloop.counter }}" value="{{ room }}" required>
                 </div>
             {% endfor %}
     
             <button type="submit">Check Out</button>
         </form>
-    </div>    
+    </div>  
 </div>
 
 {% endblock main_content %}

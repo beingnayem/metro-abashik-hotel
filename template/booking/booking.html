@@ -22,8 +22,8 @@
             <p>{{total_bookings}}</p>
         </div>
         <div class="card">
-            <h3>Rooms Available</h3>
-            <p>{{available_rooms}}</p>
+            <h3>Booked</h3>
+            <p>{{booked}}</p>
         </div>
         <div class="card">
             <h3>Today's Check-ins</h3>
@@ -87,10 +87,10 @@
                     <td>{{b.room.room_number}}</td>
                     <td>{{b.checkin_date}}</td>
                     <td>{{b.checkout_date}}</td>
-                    {% if b.room.room_status %}
-                        <td>Checked In</td>
-                        {% else %}
+                    {% if b.checkout_date %}
                         <td>Checked Out</td>
+                        {% else %}
+                        <td>Checked In</td>
                     {% endif %}
                         
                 </tr>
