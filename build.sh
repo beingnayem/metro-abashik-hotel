@@ -1,9 +1,9 @@
 set -o errexit
 
 
-apt-get update
-
-apt-get install -y wkhtmltopdf
+curl -L https://github.com/wkhtmltopdf/packaging/releases/download/v0.12.6/wkhtmltox_0.12.6-1.bionic_amd64.deb -o wkhtmltopdf.deb
+dpkg -i wkhtmltopdf.deb
+apt-get install -f  
 
 pip install -r requirements.txt
 
