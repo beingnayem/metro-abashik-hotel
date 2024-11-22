@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+
+{% block main_content %}
+
+<style>
+    /* User Profile Wrapper */
+.user-profile-wrapper {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Header */
+.user-profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.user-profile-header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.user-profile-header p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Profile Details List */
+.user-profile-details {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-profile-details li {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.user-profile-details li span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Profile Actions (Update, Change Password) */
+.user-profile-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.action-button {
+    padding: 14px 25px;
+    font-size: 16px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 48%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.action-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.action-button:focus {
+    outline: none;
+}
+
+.action-button a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .user-profile-wrapper {
+        padding: 20px;
+    }
+
+    .user-profile-header h1 {
+        font-size: 24px;
+    }
+
+    .user-profile-details li {
+        font-size: 14px;
+    }
+
+    .action-button {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .user-profile-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .action-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+</style>
+
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Customer Details</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <div class="user-profile-wrapper">
+        <div class="user-profile-header">
+            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+            <p>Email: {{ user.email }}</p>
+        </div>
+        <ul class="user-profile-details">
+            <li><span>Gender:</span> {{ user.gender }}</li>
+            <li><span>Phone Number:</span> {{ user.phone_number }}</li>
+            <li><span>Active:</span> {{ user.is_active|yesno:"Yes,No" }}</li>
+            <li><span>Admin:</span> {{ user.is_admin|yesno:"Yes,No" }}</li>
+            <li><span>Created At:</span> {{ user.created_at|date:"F d, Y H:i" }}</li>
+            <li><span>Last Updated:</span> {{ user.updated_at|date:"F d, Y H:i" }}</li>
+        </ul>
+        <div class="user-profile-actions">
+            <button class="action-button">
+                <a href="{% url 'update_profile' %}">Update</a>
+            </button>
+            <button class="action-button">
+                <a href="{% url 'change_pass' %}">Change Pass</a>
+            </button>
+        </div>
+    </div>
+    
+
+    
+</div>
+
+{% endblock main_content %}

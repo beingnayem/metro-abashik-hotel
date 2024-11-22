@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{% static 'CSS/message.css' %}">
     <link rel="stylesheet" href="{% static 'CSS/checkin.css' %}">
     <link rel="stylesheet" href="{% static 'CSS/booking_details.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/checkout_bill.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/extra-dash.css' %}">
 </head>
 <body>
   {% block message_content %}
@@ -29,9 +31,15 @@
             <a href="{% url 'room_info' %}">
               <li>Rooms</li>
             </a>
-            <li>Customers</li>
-            <li>Reports</li>
-            <li>Settings</li>
+            <a href="{% url 'customers' %}">
+              <li>Customers</li>
+            </a>
+            <a href="{% url 'bills' %}">
+              <li>Bills</li>
+            </a>
+            <a href="{% url 'profile' %}">
+              <li>Settings</li>
+            </a>
             <a href="{% url 'signout' %}">
               <li>Sign Out <i class="fas fa-sign-out-alt"></i></li>
             </a>
@@ -42,6 +50,9 @@
   {% block main_content %}
     
   {% endblock main_content %}
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{% static 'JS/dashboard.js' %}"></script>
   
 </body>
 </html>

@@ -9,13 +9,11 @@
 {% block main_content %}
 
 <div class="main-content">
-    <!-- Top bar -->
     <div class="top-bar">
         <h2>Bookings</h2>
         <div class="user-info">Hello, {{user.first_name}}</div>
     </div>
 
-    <!-- Dashboard Cards -->
     <div class="cards">
         <div class="card">
             <h3>Total Bookings</h3>
@@ -41,7 +39,6 @@
         <form method="POST" action="{% url 'checkin' %}">
             {% csrf_token %}
     
-            <!-- Available Rooms -->
             <label for="room_number">Select a Room:</label>
             <select name="room_number" id="room_number" required>
                 <option value="" disabled selected>Select Room</option>
@@ -57,14 +54,6 @@
                 {% endif %}
             </select>
     
-            <!-- Check-In Date and Time -->
-            <label for="checkin_date">Check-In Date:</label>
-            <input type="date" name="checkin_date" id="checkin_date" required>
-    
-            <label for="checkin_time">Check-In Time:</label>
-            <input type="time" name="checkin_time" id="checkin_time" value="13:00" required>
-    
-            <!-- Guest Information Fields -->
             <h3>Guest Information</h3>
             {% for i in guest_range %}
                 <div class="guest-info">

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+
+{% block main_content %}
+
+<style>
+    /* Password Change Form Wrapper */
+.password-change-form-wrapper {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Groups */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Submit Button */
+.submit-btn {
+    padding: 14px 30px;
+    font-size: 16px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.submit-btn:focus {
+    outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .password-change-form-wrapper {
+        padding: 15px;
+    }
+
+    .input-group label {
+        font-size: 14px;
+    }
+
+    .input-group input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+    }
+}
+
+</style>
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Customer Details</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <div class="password-change-form-wrapper">
+        <form action="{% url 'change_pass' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="old_password">Old Password:</label>
+                <input type="password" id="old_password" name="old_password" required>
+            </div>
+            <div class="input-group">
+                <label for="new_password">New Password:</label>
+                <input type="password" id="new_password" name="new_password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+            <button type="submit" class="submit-btn">Change Password</button>
+        </form>
+    </div>    
+    
+</div>
+
+{% endblock main_content %}

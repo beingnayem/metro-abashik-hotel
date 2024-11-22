@@ -16,55 +16,144 @@
     </div>
 
     <!-- Dashboard Cards -->
-    <div class="cards">
-        <div class="card">
-            <h3>Total Bookings</h3>
-            <p>120</p>
-        </div>
-        <div class="card">
-            <h3>Rooms Available</h3>
-            <p>45</p>
-        </div>
-        <div class="card">
-            <h3>Today's Check-ins</h3>
-            <p>30</p>
-        </div>
-        <div class="card">
-            <h3>Today's Check-outs</h3>
-            <p>25</p>
+        <!-- Main Content: Dashboard Statistics -->
+    <div class="custom-dashboard-container">
+        <div class="custom-dashboard-statistics">
+                <!-- Room Statistics Section -->
+            <div class="custom-stat-box custom-room-statistics-box">
+                <h2 class="custom-stat-title">Room Statistics</h2>
+                <p class="custom-stat-value">{{ total_rooms }}</p>
+                <p class="custom-stat-info"><strong>Available Rooms:</strong> {{ available_rooms }}</p>
+                <p class="custom-stat-info"><strong>Booked Rooms:</strong> {{ booked_rooms }}</p>
+                <p class="custom-stat-info"><strong>Available Silver Rooms:</strong> {{ available_silver_rooms }}</p>
+                <p class="custom-stat-info"><strong>Available Golden Rooms:</strong> {{ available_golden_rooms }}</p>
+            </div>
+
+                <!-- Booking Statistics Section -->
+            <div class="custom-stat-box custom-booking-statistics-box">
+                <h2 class="custom-stat-title">Booking Statistics</h2>
+                <p class="custom-stat-info"><strong>Total Bookings:</strong> {{ total_bookings }}</p>
+                <p class="custom-stat-info"><strong>Checked In:</strong> {{ checkedin }}</p>
+                <p class="custom-stat-info"><strong>Today Check-out:</strong> {{ today_checkin }}</p>
+                <p class="custom-stat-info"><strong>Today Check-in:</strong> {{ today_checkout }}</p>
+            </div>
+
+                <!-- Income Statistics Section -->
+            <div class="custom-stat-box custom-income-statistics-box">
+                <h2 class="custom-stat-title">Income Statistics</h2>
+                <p class="custom-stat-info"><strong>Total:</strong> {{ total_income }} K</p>
+                <p class="custom-stat-info"><strong>Today:</strong> {{ today_collection }}</p>
+                <p class="custom-stat-info"><strong>This Month:</strong> {{ this_month_collection }}</p>
+                <p class="custom-stat-info"><strong>Last Month:</strong> {{ last_month_collection }}</p>
+
+            </div>
         </div>
     </div>
 
     <!-- Booking Table Section -->
-    <div class="table-section">
-        <h3>Recent Bookings</h3>
-        <table>
-            <tr>
-                <th>Booking ID</th>
-                <th>Customer Name</th>
-                <th>Room Number</th>
-                <th>Check-in Date</th>
-                <th>Check-out Date</th>
-                <th>Status</th>
-            </tr>
-            <tr>
-                <td>#1001</td>
-                <td>John Doe</td>
-                <td>101</td>
-                <td>2024-10-25</td>
-                <td>2024-10-27</td>
-                <td>Checked In</td>
-            </tr>
-            <tr>
-                <td>#1002</td>
-                <td>Jane Smith</td>
-                <td>102</td>
-                <td>2024-10-26</td>
-                <td>2024-10-28</td>
-                <td>Pending</td>
-            </tr>
-        </table>
-    </div>
+    
+    {% if recent_bookings %}
+        <div class="table-section">
+            <h3>Recent Bookings</h3>
+            <table>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Customer Name</th>
+                    <th>Room Number</th>
+                    <th>Check-in Date</th>
+                    <th>Check-out Date</th>
+                    <th>Status</th>
+                </tr>
+                
+                {% for r in recent_bookings %}
+                    <tr>
+                        <td>{{r.id}}</td>
+                        <td>
+                            {% for customer in r.customers.all %}
+                                {{ customer.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{r.room.room_number}}</td>
+                        <td>{{r.checkin_date}}</td>
+                        <td>{{r.checkout_date}}</td>
+                        <td>
+                            {% if r.checkout_date %}
+                                Checked Out
+                            {% else %}
+                                Checked In
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                    
+            </table>
+        </div>
+        {% else %}
+            <div class="no-booking">
+                <h3>No Recent Bookings</h3>
+            </div>
+    {% endif %}
+
+
+    {% if recent_bills %}
+        <div class="table-section">
+            <h3>Recent Bills</h3>
+            <table>
+                <tr>
+                    <th>Bill ID</th>
+                    <th>Customer Name</th>
+                    <th>Email</th>
+                    <th>Date</th>
+                    <th>Cost</th>
+                    <th>Action</th>
+                </tr>
+                
+                {% for b in recent_bills %}
+                    <tr>
+                        <td>#{{b.pk}}</td>
+                        <td>{{b.customer.name}}</td>
+                        <td>{{b.customer.email}}</td>
+                        <td>{{b.created_at}}</td>
+                        <td>{{b.total_cost}}</td>    
+                        <td>
+                            <a href="{% url 'view_invoice' bill_id=b.pk %}" target="_blank">
+                                <button>View</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                    
+            </table>
+        </div>
+        {% else %}
+            <div class="no-booking">
+                <h3>No Recent Bookings</h3>
+            </div>
+    {% endif %}
+        
 </div>
 
 {% endblock main_content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
