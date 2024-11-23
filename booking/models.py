@@ -42,7 +42,7 @@ class Booking(models.Model):
 
 class Billing(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    bookings = models.ManyToManyField(Booking, blank=True)  # 'null=True' is not needed in ManyToManyField
+    bookings = models.ManyToManyField(Booking, blank=True)
     total_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     created_at = models.DateField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateField(auto_now=True, null=True, blank=True)
