@@ -7,20 +7,19 @@ from datetime import date, time
 from django.db.models.functions import TruncDate
 
 
-
 @login_required
 def dashboard(request):
-    total_rooms = Room.total_rooms()
-    available_rooms = Room.total_rooms_available()
-    booked_rooms = Room.total_rooms_booked()
-    available_silver_rooms = Room.total_available_silver_rooms()
-    available_golden_rooms = Room.total_available_golden_rooms()
+    total_rooms = Room.total_rooms()  
+    available_rooms = Room.total_rooms_available()  
+    booked_rooms = Room.total_rooms_booked() 
+    available_silver_rooms = Room.total_available_silver_rooms()  
+    available_golden_rooms = Room.total_available_golden_rooms()  
+
     total_bookings = Booking.objects.count()
-    
+
     t_income = Billing.objects.aggregate(Sum('total_cost'))['total_cost__sum'] or 0
     total_income = round(t_income / 1000, 1)
 
-    # Use TruncDate to truncate to date part and compare
     today_collection = Billing.objects.annotate(created_at_date=TruncDate('created_at')) \
         .filter(created_at_date=date.today()) \
         .aggregate(Sum('total_cost'))['total_cost__sum'] or 0
@@ -34,13 +33,14 @@ def dashboard(request):
         .aggregate(Sum('total_cost'))['total_cost__sum'] or 0
     last_month_collection = round(last_month_collection / 1000, 1)
     
-    checkedin = Booking.objects.filter(checkout_date=None).count()
-    today_checkin = Booking.objects.filter(checkin_date=date.today()).count()
-    today_checkout = Booking.objects.filter(checkout_date=date.today()).count()
-    
-    recent_bookings = Booking.objects.all().order_by('-id')[:5]
-    recent_bills = Billing.objects.all().order_by('-id')[:5]
+    checkedin = Booking.objects.filter(checkout_date=None).count()  # Guests currently checked in
+    today_checkin = Booking.objects.filter(checkin_date=date.today()).count()  # Check-ins today
+    today_checkout = Booking.objects.filter(checkout_date=date.today()).count()  # Check-outs today
 
+    recent_bookings = Booking.objects.all().order_by('-id')[:5]  # Last 5 bookings
+    recent_bills = Billing.objects.all().order_by('-id')[:5]  # Last 5 billing entries
+
+    # Prepare context dictionary to pass all calculated data to the template
     context = {
         'total_rooms': total_rooms,
         'available_rooms': available_rooms,
@@ -59,4 +59,5 @@ def dashboard(request):
         'recent_bills': recent_bills
     }
 
+    # Render the dashboard template with the collected data
     return render(request, 'dashboard/dashboard.html', context)
