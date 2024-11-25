@@ -25,7 +25,8 @@ def customers(request):
         'curent_guest': curent_guest,
         'today_checkin_guest': today_checkin_guest,
         'today_checkout_guest': today_checkout_guest,
-        'customers': customers
+        'customers': customers,
+        'title': 'Customers'
     }
 
     # Render the 'customers' page with the context
@@ -67,7 +68,8 @@ def customer_history(request):
         'today_checkin_guest': today_checkin_guest,
         'today_checkout_guest': today_checkout_guest,
         'customer': customer,
-        'bookings': bookings
+        'bookings': bookings,
+        'title': 'Customer History'
     }
 
     # Render the 'customer_details' page with the context

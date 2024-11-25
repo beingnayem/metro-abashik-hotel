@@ -19,7 +19,8 @@ def room_info(request):
         'total_rooms_booked': total_rooms_booked,
         'total_available_silver_rooms': total_available_silver_rooms,
         'total_available_golden_rooms': total_available_golden_rooms,
-        'rooms': rooms
+        'rooms': rooms,
+        'title': 'Room Information'
     }
     
     if request.method == 'POST':
@@ -87,6 +88,7 @@ def create_room(request):
         'total_rooms_booked': total_rooms_booked,
         'total_available_silver_rooms': total_available_silver_rooms,
         'total_available_golden_rooms': total_available_golden_rooms,
+        'title': 'Create Room'
     }
     
     return render(request, 'room/create_room.html', context)

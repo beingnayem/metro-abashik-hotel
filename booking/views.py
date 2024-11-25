@@ -34,7 +34,8 @@ def booking(request):
         'total_bookings': total_bookings,
         'today_checkin': today_checkin, 
         'today_checkout': today_checkout,
-        'booked': booked
+        'booked': booked,
+        'title': 'Bookings'
     }
     return render(request, 'booking/booking.html', context)
 
@@ -58,7 +59,8 @@ def checkout_page(request):
             'today_checkin': today_checkin,
             'today_checkout': today_checkout,
             'booked': booked,  # Total booked rooms
-            'rooms_no': range(rooms_no)  # Range for room input generation
+            'rooms_no': range(rooms_no),  # Range for room input generation
+            'title': 'Checkout'
         }
         return render(request, 'booking/checkout_page.html', context)
 
@@ -85,7 +87,8 @@ def checkin_page(request):
             'today_checkout': today_checkout,
             'available_rooms': available_rooms, 
             'rooms': rooms,
-            'guest_range': range(guests)  # Generate range for guest input fields
+            'guest_range': range(guests),  # Generate range for guest input fields
+            'title': 'Check-In'
         }
         return render(request, 'booking/checkin_page.html', context)
 
@@ -239,7 +242,8 @@ def checkout(request):
         'booked': booked,
         'bookings_info': booking_info,  
         'customer': customer,           
-        'total_cost': total_cost         
+        'total_cost': total_cost,
+        'title': 'Checkout'        
     }
 
     return render(request, 'booking/checkout_bill.html', context)
@@ -365,7 +369,8 @@ def booking_details(request):
             'today_checkin': today_checkin,
             'today_checkout': today_checkout,
             'booked': booked,
-            'booking': booking
+            'booking': booking,
+            'title': 'Booking Details'
         }
 
         return render(request, 'booking/search_booking.html', context)
@@ -392,7 +397,8 @@ def bills(request):
         'total_bills': total_bills,
         'today_bills': today_bills,
         'today_total_in_k': today_total_in_k,
-        'booked': booked
+        'booked': booked,
+        'title': 'Bills'
     }
 
     return render(request, 'booking/bills.html', context)
@@ -434,7 +440,8 @@ def search_bill(request):
                 'total_bills': total_bills,
                 'today_bills': today_bills,
                 'today_total_in_k': today_total_in_k,
-                'booked': booked
+                'booked': booked,
+                'title': 'Bill Details'
             }
             return render(request, 'booking/bill_details.html', context)
 
@@ -453,6 +460,7 @@ def view_invoice(request, bill_id):
         'bill': bill,
         'booking_info': booking_info,
         'total_cost': total_cost,
+        'title': f'Invoice {bill_id}'
     }
     pdf = generate_pdf('booking/invoice_template.html', pdf_context)
 
