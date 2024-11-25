@@ -220,6 +220,7 @@ def checkout(request):
                 messages.error(request, "This room is not booked yet.")
                 return redirect('booking_page')
 
+            booking.save()
             # Accumulate total cost and add booking details
             total_cost += booking.total_cost
             booking_info.append(booking)
@@ -296,9 +297,9 @@ def checkout_confirm(request):
 
             # Associate the booking with the bill
             bill.bookings.add(booking)
-            total_cost += booking.total_cost
 
         bill.save()  # Save the billing record
+        total_cost += bill.total_cost
 
         # Generate the invoice PDF
         pdf_context = {
