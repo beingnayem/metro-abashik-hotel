@@ -49,7 +49,8 @@ def profile_view(request):
     # Fetch the authenticated user's details to display in their profile.
     user = request.user
     context = {
-        'user': user
+        'user': user,
+        'title' : 'Profile'
     }
     return render(request, 'accounts/profile.html', context)
 

@@ -56,7 +56,8 @@ def dashboard(request):
         'today_checkin': today_checkin,
         'today_checkout': today_checkout,
         'recent_bookings': recent_bookings,
-        'recent_bills': recent_bills
+        'recent_bills': recent_bills,
+        'title': 'Dashboard'
     }
 
     # Render the dashboard template with the collected data
