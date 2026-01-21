@@ -1,0 +1,79 @@
+/* Alert Wrapper - Ensures Isolation */
+
+
+.message-container {
+    position: absolute; /* Position it absolutely at the top */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+
+.alert-wrapper .messages {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* Form Alert Styling */
+.alert-wrapper .form-alert {
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    font-size: 16px;
+    color: #fff;
+}
+
+/* Alert Color Themes */
+.alert-wrapper .success {
+    background-color: #4CAF50; /* Green for success messages */
+}
+
+.alert-wrapper .error {
+    background-color: #f44336; /* Red for error messages */
+}
+
+.alert-wrapper .warning {
+    background-color: #ff9800; /* Orange for warning messages */
+}
+
+.alert-wrapper .info {
+    background-color: #2196F3; /* Blue for informational messages */
+}
+
+/* Close Button */
+.alert-wrapper .alert-closebtn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.alert-wrapper .alert-closebtn:hover {
+    color: #ddd;
+}
+
+/* Message Text */
+.alert-wrapper .message-data {
+    margin: 0;
+    padding: 5px 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .alert-wrapper .form-alert {
+        padding: 10px;
+        font-size: 14px;
+    }
+    .alert-wrapper .alert-closebtn {
+        font-size: 18px;
+        top: 8px;
+        right: 12px;
+    }
+}

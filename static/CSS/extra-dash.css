@@ -1,0 +1,103 @@
+
+
+/* Main Content Styling (Dashboard Statistics) */
+.custom-dashboard-container {
+    margin: 0;
+    padding: 30px;
+    width: calc(100% - 250px); /* Full width minus sidebar */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Custom Dashboard Statistics Box */
+.custom-dashboard-statistics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+/* Statistics Box Styling */
+.custom-stat-box {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* Smooth transition on hover */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.custom-stat-box:hover {
+    transform: translateY(-10px); /* Lift up effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+/* Title Styling */
+.custom-stat-title {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Number/Value Styling */
+.custom-stat-value {
+    font-size: 32px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Room Statistics Specific Styles */
+.custom-room-statistics-box {
+    background-color: #e0f7fa;
+    border-left: 5px solid #00838f;
+}
+
+.custom-booking-statistics-box {
+    background-color: #f3e5f5;
+    border-left: 5px solid #9c27b0;
+}
+
+.custom-income-statistics-box {
+    background-color: #fff3e0;
+    border-left: 5px solid #fb8c00;
+}
+
+/* Info Text Styling */
+.custom-stat-info p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #666;
+}
+
+/* Responsive Grid for Smaller Screens */
+@media (max-width: 768px) {
+    /* Sidebar hidden on small screens */
+    .custom-sidebar {
+        display: none;
+    }
+
+    .custom-dashboard-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    /* Stacked layout for cards on mobile */
+    .custom-dashboard-statistics {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+

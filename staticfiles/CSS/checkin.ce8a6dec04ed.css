@@ -1,0 +1,79 @@
+/* checkin.css */
+
+.checkin-container {
+    margin: 0 auto;
+    margin-top: 30px;
+    background-color: #ffffff;
+    padding: 20px;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.checkin-container h2 {
+    text-align: center;
+    color: #333333;
+}
+
+.messages {
+    margin-bottom: 15px;
+}
+
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.checkin-container label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.checkin-container input[type="text"],
+.checkin-container input[type="email"],
+.checkin-container input[type="tel"],
+.checkin-container input[type="date"],
+.checkin-container input[type="time"],
+.checkin-container select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+}
+
+.checkin-container button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-top: 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.checkin-container button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.guest-info {
+    background-color: #f8f9fa;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 2px solid #eaeaea;
+        }
+        .content {
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .content h2 {
+            color: #333;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            padding: 10px 0;
+            border-top: 2px solid #eaeaea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Metro Abashik Hotel</h1>
+            <p>Your Check-In Details</p>
+        </div>
+        <div class="content">
+            <h2>Welcome, {{ customer.name }}</h2>
+            <p>Your check-in was successful! Here are the details:</p>
+            <ul>
+                <li><strong>Room Number:</strong> {{ room_number }}</li>
+                <li><strong>Check-In Date:</strong> {{ checkin_date }}</li>
+                <li><strong>Check-In Time:</strong> {{ checkin_time }}</li>
+                <li><strong>Phone Number:</strong> {{ customer.phone_number }}</li>
+                <li><strong>Address:</strong> {{ customer.address }}</li>
+            </ul>
+            {% if roommates %}
+            <h3>Roommates:</h3>
+            <ul>
+                {% for roommate in roommates %}
+                <li>{{ roommate.name }} - {{ roommate.email }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <p>We hope you have a pleasant stay with us!</p>
+        </div>
+        <div class="footer">
+            <p>Contact us at support@metroabashik.com | 01581195268</p>
+            <p>Thank you for choosing Metro Abashik Hotel.</p>
+        </div>
+    </div>
+</body>
+</html>

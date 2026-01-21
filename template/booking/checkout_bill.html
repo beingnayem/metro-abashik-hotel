@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+
+{% block main_content %}
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Bookings</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="cards">
+        <div class="card">
+            <h3>Total Bookings</h3>
+            <p>{{total_bookings}}</p>
+        </div>
+        <div class="card">
+            <h3>Booked</h3>
+            <p>{{booked}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Check-ins</h3>
+            <p>{{today_checkin}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Check-outs</h3>
+            <p>{{today_checkout}}</p>
+        </div>
+    </div>
+
+    <form action="{% url 'checkout_confrim' %}" method="POST">
+        {% csrf_token %}
+        <div class="checkout-confirmation-container">
+            <h2 class="checkout-title">Billing & Room Details</h2>
+        
+            <!-- Biller Information Section -->
+            <div class="checkout-section">
+                <div class="checkout-section-title">Biller Information</div>
+                <p><strong>Name:</strong> {{ customer.name }}</p>
+                <p><strong>Email:</strong> {{ customer.email }}</p>
+                <input type="hidden" name="email" value="{{ customer.email }}">
+                <p><strong>Phone:</strong> {{ customer.phone_number }}</p>
+                <p><strong>Address:</strong> {{ customer.address }}</p>
+            </div>
+        
+            <!-- Room Details Section -->
+    
+            
+            <div class="checkout-section">
+                <div class="checkout-section-title">Room Details</div>
+
+                {% for booking in bookings_info %}
+                    
+                <div class="checkout-room-details">
+                    <div class="checkout-room-header">
+                        <h3 class="checkout-room-title">Room {{ booking.room.room_number }}</h3>
+                        <input type="hidden" name="room_numbers[]" value="{{ booking.room.room_number }}">
+                    </div>
+                    <div class="checkout-room-date">
+                        <p><strong>Check-in:</strong> {{ booking.checkin_date }}, {{ booking.checkin_time }}</p>
+                        <p><strong>Check-out:</strong> {{ booking.checkout_date }}, {{ booking.checkout_time }}</p>
+                    </div>
+                    <table class="checkout-cost-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Base Room Charge</td>
+                                <td>{{ booking.room.room_rent_d }} TK</td>
+                            </tr>
+                            
+                            {% if booking.extra_guest_count > 0 %}
+                                <tr>
+                                    <td>Extra Bed Charge</td>
+                                    <td>{{ booking.room.room_rent_h }} TK</td>
+                                </tr>
+                            {% endif %}
+                                
+                        </tbody>
+                    </table>
+                    <div class="checkout-room-subtotal">Room Subtotal: {{ booking.total_cost }} TK</div>
+        
+                    <!-- Roommate Details -->
+                    <div class="checkout-roommates">
+                        <h4 class="checkout-roommate-title">Roommates</h4>
+                        <ul class="checkout-roommate-list">
+                            {% for roommate in booking.customers.all %}
+                            <li>
+                                <p><strong>Name:</strong> {{ roommate.name }}</p>
+                                <p><strong>Email:</strong> {{ roommate.email }}</p>
+                                <p><strong>Phone:</strong> {{ roommate.phone_number }}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        
+            <!-- Total Cost Section -->
+            <div class="checkout-total-cost">
+                Total Cost: {{ total_cost }} TK
+            </div>
+        
+            <!-- Checkout Button -->
+            <button class="checkout-btn" type="submit">Checkout</button>
+        </div>
+    </form>
+      
+</div>
+
+{% endblock main_content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,180 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.checkout-confirmation-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Section Titles */
+.checkout-title {
+    text-align: center;
+    font-size: 28px;
+    color: #4a90e2;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.checkout-section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #4a4a4a;
+    border-left: 4px solid #4a90e2;
+    padding-left: 10px;
+}
+
+/* Biller Information */
+.checkout-section p {
+    font-size: 16px;
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+/* Room Details */
+.checkout-room-details {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.checkout-room-header {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.checkout-room-title {
+    font-size: 22px;
+    color: #333;
+    font-weight: bold;
+    margin: 0;
+}
+
+.checkout-room-date p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.checkout-cost-table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+.checkout-cost-table th,
+.checkout-cost-table td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.checkout-cost-table th {
+    background-color: #4a90e2;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.checkout-room-subtotal {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Roommates Section */
+.checkout-roommates {
+    margin-top: 20px;
+}
+
+.checkout-roommate-title {
+    font-size: 18px;
+    color: #4a90e2;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.checkout-roommate-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.checkout-roommate-list li {
+    background-color: #f4f8ff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.checkout-roommate-list p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Total Cost Section */
+.checkout-total-cost {
+    text-align: right;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #4a90e2;
+}
+
+/* Checkout Button */
+.checkout-btn {
+    display: block;
+    width: 20%;
+    text-align: center;
+    background-color: #4a90e2;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px;
+    margin-top: 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #357abd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .checkout-confirmation-container {
+        padding: 15px;
+    }
+
+    .checkout-title {
+        font-size: 24px;
+    }
+
+    .checkout-section-title {
+        font-size: 18px;
+    }
+
+    .checkout-room-title {
+        font-size: 20px;
+    }
+
+    .checkout-total-cost {
+        font-size: 20px;
+    }
+}

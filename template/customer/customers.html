@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block message_content %}
+    {% include 'message.html' %}
+{% endblock message_content %}
+
+
+{% block main_content %}
+
+<div class="main-content">
+    <!-- Top bar -->
+    <div class="top-bar">
+        <h2>Customer Information</h2>
+        <div class="user-info">Hello, {{user.first_name}}</div>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Total Guest</h3>
+            <p>{{total_guest}}</p>
+        </div>
+        <div class="card">
+            <h3>Curent Guest</h3>
+            <p>{{curent_guest}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Check In Guest</h3>
+            <p>{{today_checkin_guest}}</p>
+        </div>
+        <div class="card">
+            <h3>Today's Check Out Guest</h3>
+            <p>{{today_checkout_guest}}</p>
+        </div>
+    </div>
+
+    <div class="room-search-section">
+        <h3>Find Customer</h3>
+        <form method="POST" action="{% url 'customer_history' %}">
+            {% csrf_token %}
+            <label for="room_number">E-mail:</label>
+            <input type="text" id="room_number" name="email" placeholder="Enter Guest E-mail" required>
+            <button type="submit">Search Guest</button>
+        </form>
+    </div>
+
+      
+    {% if customers %}
+        <div class="table-section">
+            <h3>Recent Customer</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                </tr>
+                
+                {% for c in customers %}    
+                    <tr>
+                        <td>{{c.name}}</td>
+                        <td>{{c.email}}</td>
+                        <td>{{c.phone_number}}</td>
+                        <td>{{c.address}}</td>
+                    </tr>
+                {% endfor %}  
+            </table>
+        </div>
+        {% else %}
+        <div class="table-section">
+            <h3>No Customer Yet</h3>
+        </div>
+    {% endif %}
+        
+    
+</div>
+
+{% endblock main_content %}
